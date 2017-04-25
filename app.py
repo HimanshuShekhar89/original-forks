@@ -57,9 +57,9 @@ def makeYqlQuery(req):
     if city is None:
         return None
     
-    if degree is "celsius"
+    if degree is "celsius":
         u="c"
-    else
+    else:
         u="f"
     return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "' AND u='" + u + "')"
 
