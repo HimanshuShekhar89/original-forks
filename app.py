@@ -36,7 +36,7 @@ def webhook():
 
 
 def processRequest(req):
-    if req.get("result").get("action") != "yahooWeatherForecast":
+    if req.get("result").get("action") != "yahooWeatherForecast" or req.get("result").get("action") != "yahooWeatherCondition":
         return {}
     baseurl = "https://query.yahooapis.com/v1/public/yql?"
     yql_query = makeYqlQuery(req)
@@ -80,7 +80,9 @@ def makeWebhookResult(data):
     item = channel.get('item')
     location = channel.get('location')
     units = channel.get('units')
-    windspd = channel.get('wind')
+    winddetail = channel.get('wind')
+    atmosphere = channel.get('atmosphere')
+    sun = channel.get('astronomy')
     if (location is None) or (item is None) or (units is None):
         return {}
 
@@ -89,11 +91,24 @@ def makeWebhookResult(data):
         return {}
 
     # print(json.dumps(item, indent=4))
-
-    speech = "The weather in " + location.get('city') + ": " + condition.get('text') + \
-             ", the temperature is " + condition.get('temp') + " " + units.get('temperature')+\
-             ", windspeed is " + windspd.get('speed') + " " + units.get('speed')
-
+    if req.get("result").get("action") == "yahooWeatherForecast":
+        speech = "The weather in " + location.get('city') + ": " + condition.get('text') + \
+                 ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
+            
+    if req.get("result").get("action") == "yahooWeatherCondition":
+        if condition is "windspeed":
+            speech = "The windspeed is " + winddetail.get('speed') + " " + units.get('speed') +" in " + location.get('city')
+        if condition is "direction":
+            speech = "The direction is " + winddetail.get('direction') + " " +" in " + location.get('city')
+        if condition is "humidity":
+            speech = "The humidity is " + atmosphere.get('humidity') + " " + units.get('speed') +" in " + location.get('city')
+        if condition is "pressure":
+            speech = "The pressure is " + atmosphere.get('pressure') +" in " + location.get('city')
+        if condition is "sunrise":  
+            speech = "The Sunrise is at" + sun.get('sunrise') +" in " + location.get('city')
+        if condition is "sunset":
+            speech = "The Sunset is at" + sun.get('sunset') +" in " + location.get('city')
+        
     print("Response:")
     print(speech)
 
