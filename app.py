@@ -66,16 +66,16 @@ def makeYqlQuery(req):
 
 def makeWebhookResult(data,req):
     query = data.get('query')
-    if query is None:
-        return {}
+    #if query is None:
+        #return {}
 
     result = query.get('results')
-    if result is None:
-        return {}
+    #if result is None:
+        #return {}
 
     channel = result.get('channel')
-    if channel is None:
-        return {}
+    #if channel is None:
+        #return {}
 
     item = channel.get('item')
     location = channel.get('location')
@@ -87,8 +87,8 @@ def makeWebhookResult(data,req):
     winddetail = channel.get('wind')
     atmosphere = channel.get('atmosphere')
     sun = channel.get('astronomy')
-    if (location is None) or (item is None) or (units is None):
-        return {}
+    #if (location is None) or (item is None) or (units is None):
+        #return {}
 
     cond = item.get('condition')
 
