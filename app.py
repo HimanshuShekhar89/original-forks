@@ -45,10 +45,7 @@ def processRequest(req):
     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
     result = urlopen(yql_url).read()
     data = json.loads(result)
-    #if  req.get("result").get("action") == "yahooWeatherForecast":
     res = makeWebhookResult(data,req)
-    #if  req.get("result").get("action") == "yahooWeatherCondition":
-        #res = makeWebhookResult(data,req)
     return res
 
 
@@ -103,17 +100,17 @@ def makeWebhookResult(data,req):
                  ", the temperature is " + cond.get('temp') + " " + units.get('temperature')
             
     if req.get("result").get("action") == "yahooWeatherCondition":
-        if condition is "windspeed":
+        if condition == "windspeed":
             speech = "The windspeed is " + winddetail.get('speed') + " " + units.get('speed') +" in " + location.get('city')
-        if condition is "direction":
+        if condition == "direction":
             speech = "The direction is " + winddetail.get('direction') + " " +" in " + location.get('city')
-        if condition is "humidity":
+        if condition == "humidity":
             speech = "The humidity is " + atmosphere.get('humidity') + " " + units.get('speed') +" in " + location.get('city')
-        if condition is "pressure":
+        if condition == "pressure":
             speech = "The pressure is " + atmosphere.get('pressure') +" in " + location.get('city')
-        if condition is "sunrise":  
+        if condition == "sunrise":  
             speech = "The Sunrise is at" + sun.get('sunrise') +" in " + location.get('city')
-        if condition is "sunset":
+        if condition == "sunset":
             speech = "The Sunset is at" + sun.get('sunset') +" in " + location.get('city')
         
     print("Response:")
