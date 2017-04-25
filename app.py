@@ -45,10 +45,10 @@ def processRequest(req):
     yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
     result = urlopen(yql_url).read()
     data = json.loads(result)
-    if  req.get("result").get("action") == "yahooWeatherForecast":
-        res = makeWebhookResult(data)
-    if  req.get("result").get("action") == "yahooWeatherCondition":
-        res = makeWebhookResult(data,req)
+    #if  req.get("result").get("action") == "yahooWeatherForecast":
+    res = makeWebhookResult(data,req)
+    #if  req.get("result").get("action") == "yahooWeatherCondition":
+        #res = makeWebhookResult(data,req)
     return res
 
 
@@ -83,20 +83,24 @@ def makeWebhookResult(data,req):
     item = channel.get('item')
     location = channel.get('location')
     units = channel.get('units')
+    result = req.get("result")
+    parameters = result.get("parameters")
+    condition=parameters.get("Condition")
+    
     winddetail = channel.get('wind')
     atmosphere = channel.get('atmosphere')
     sun = channel.get('astronomy')
     if (location is None) or (item is None) or (units is None):
         return {}
 
-    condition = item.get('condition')
-    if condition is None:
+    cond = item.get('condition')
+    if cond is None:
         return {}
 
     # print(json.dumps(item, indent=4))
     if req.get("result").get("action") == "yahooWeatherForecast":
-        speech = "The weather in " + location.get('city') + ": " + condition.get('text') + \
-                 ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
+        speech = "The weather in " + location.get('city') + ": " + cond.get('text') + \
+                 ", the temperature is " + cond.get('temp') + " " + units.get('temperature')
             
     if req.get("result").get("action") == "yahooWeatherCondition":
         if condition is "windspeed":
