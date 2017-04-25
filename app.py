@@ -91,8 +91,7 @@ def makeWebhookResult(data,req):
         return {}
 
     cond = item.get('condition')
-    if cond is None:
-        return {}
+
 
     # print(json.dumps(item, indent=4))
     #if req.get("result").get("action") == "yahooWeatherForecast":
