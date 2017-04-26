@@ -107,9 +107,9 @@ def makeWebhookResult(data,req):
             if condition == "pressure":
                      speech = "The pressure is " + atmosphere.get('pressure') +" in " + location.get('city')
             if condition == "sunrise":  
-                     speech = "The Sunrise is at" + sun.get('sunrise') +" in " + location.get('city')
+                     speech = "The Sunrise is at " + sun.get('sunrise') +" in " + location.get('city')
             if condition == "sunset":
-                     speech = "The Sunset is at" + sun.get('sunset') +" in " + location.get('city')
+                     speech = "The Sunset is at " + sun.get('sunset') +" in " + location.get('city')
     print("Response:")
     print(speech)
 
