@@ -96,7 +96,7 @@ def makeWebhookResult(data,req):
     # print(json.dumps(item, indent=4))
     if req.get("result").get("action") == "yahooWeatherForecast":
             speech = "The weather in " + location.get('city') + ": " + cond.get('text') + \
-                     ", the temperature is " + cond.get('temp') + " " + units.get('temperature')
+                     ", the temperature is " + cond.get('temp') + " " + units.get('temperature') +  parameters.get("Condition") + condition
     if req.get("result").get("action") == "yahooWeatherCondition":
             if parameters.get("Condition") == "windspeed":
                      speech = "The windspeed is " + winddetail.get('speed') + " " + units.get('speed') +" in " + location.get('city')
