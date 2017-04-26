@@ -57,11 +57,11 @@ def makeYqlQuery(req):
     #if city is None:
         #return None
     
-    #if degree is "celsius":
-        #u="c"
-    #else:
-        #u="f" AND u='" + u + "'
-    return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
+    if degree == "celsius":
+        u="c"
+    else:
+        u="f" 
+    return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "' AND u='" + u + "')"
 
 
 def makeWebhookResult(data,req):
@@ -96,14 +96,14 @@ def makeWebhookResult(data,req):
     # print(json.dumps(item, indent=4))
     if req.get("result").get("action") == "yahooWeatherForecast":
             speech = "The weather in " + location.get('city') + ": " + cond.get('text') + \
-                     ", the temperature is " + cond.get('temp') + " " + units.get('temperature') +  parameters.get("Condition")
+                     ", the temperature is " + cond.get('temp') + " " + units.get('temperature')
     if req.get("result").get("action") == "yahooWeatherCondition":
             if parameters.get("Condition") == "windspeed":
                      speech = "The windspeed is " + winddetail.get('speed') + " " + units.get('speed') +" in " + location.get('city')
             if condition == "direction":
                      speech = "The direction is " + winddetail.get('direction') + " " +" in " + location.get('city')
             if condition == "humidity":
-                     speech = "The humidity is " + atmosphere.get('humidity') + " " + units.get('speed') +" in " + location.get('city')
+                     speech = "The humidity is " + atmosphere.get('humidity')  +"% " + " in " + location.get('city')
             if condition == "pressure":
                      speech = "The pressure is " + atmosphere.get('pressure') +" in " + location.get('city')
             if condition == "sunrise":  
