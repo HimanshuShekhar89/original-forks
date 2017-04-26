@@ -57,11 +57,11 @@ def makeYqlQuery(req):
     #if city is None:
         #return None
     
-    if degree == "celsius":
-        u="c"
-    else:
-        u="f" 
-    return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "' AND u='" + u + "')"
+    #if degree == "celsius":
+        #u="c"
+    #else:
+        #u="f" AND u='" + u + "'
+    return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
 
 
 def makeWebhookResult(data,req):
