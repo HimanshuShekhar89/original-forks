@@ -26,7 +26,7 @@ def webhook():
     print("Request:")
     print(json.dumps(req, indent=4))
 
-    res = processRequest(req)
+    res = makeWebhookResult(req)
 
     res = json.dumps(res, indent=4)
     # print(res)
@@ -64,7 +64,7 @@ def makeYqlQuery(req):
     return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
 
 
-def makeWebhookResult(data,req):
+def makeWebhookResult(req):
     query = data.get('query')
     #if query is None:
         #return {}
@@ -91,7 +91,13 @@ def makeWebhookResult(data,req):
         #return {}
 
     cond = item.get('condition')
-
+    
+    data=[{"LOB": "Cloud Dedicated", "STLF": 26.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 27.0, "mon": "April", "V": 10.0, "date": 42461.0, "Forecast_Indicator": "Actual"},
+          {"LOB": "Cloud Dedicated", "STLF": 28.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 29.0, "mon": "May", "V": 11.0, "date": 42491.0, "Forecast_Indicator": "Actual"}, 
+          {"LOB": "Cloud Dedicated", "STLF": 30.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 31.0, "mon": "June", "V": 12.0, "date": 42522.0, "Forecast_Indicator": "Actual"},
+          {"LOB": "Cloud Dedicated", "STLF": 32.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 33.0, "mon": "July", "V": 13.0, "date": 42552.0, "Forecast_Indicator": "Actual"},
+          {"LOB": "Cloud Dedicated", "STLF": 34.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 35.0, "mon": "August", "V": 14.0, "date": 42583.0, "Forecast_Indicator": "Actual"}, 
+          {"LOB": "Cloud Dedicated", "STLF": 36.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 37.0, "mon": "September", "V": 15.0, "date": 42614.0, "Forecast_Indicator": "Actual"}]
 
     # print(json.dumps(item, indent=4))
     if req.get("result").get("action") == "yahooWeatherForecast":
@@ -118,7 +124,7 @@ def makeWebhookResult(data,req):
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
-        "source": "apiai-weather-webhook-sample"
+        "source": "api_ai_forecast"
     }
 
 
