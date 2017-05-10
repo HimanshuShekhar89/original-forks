@@ -56,9 +56,10 @@ def makeWebhookResult(req):
             res=num["Arima"]
     # print(json.dumps(item, indent=4))
     if req.get("result").get("action") == "forecastdata":
-            speech = "The forecast for " + parameters.get("LOBType") + " for the month " + parameters.get("date") + \
-                     " is " + res
-   
+            speech = "The forecast for " + parameters.get("LOBType") + " for the month " + parameters.get("date") +" is "
+                     
+    print("Response:")
+    print(speech)
     return {
         "speech": speech,
         "displayText": speech,
