@@ -38,20 +38,20 @@ def webhook():
 
 def makeWebhookResult(req):
     
-    if req.get("result").get("action") != "forecastdata":
-        return {}
+    #if req.get("result").get("action") != "forecastdata":
+       # return {}
     result = req.get("result")
     parameters = result.get("parameters")
     date=parameters.get("date")
     lob=parameters.get("LOBType")
-    data={forecast:[{"LOB": "Cloud Dedicated", "STLF": 26.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 27.0, "mon": "April", "V": 10.0, "Forecast_Indicator": "Actual"}, 
+    data={"forecast":[{"LOB": "Cloud Dedicated", "STLF": 26.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 27.0, "mon": "April", "V": 10.0, "Forecast_Indicator": "Actual"}, 
                     {"LOB": "Cloud Dedicated", "STLF": 28.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 29.0, "mon": "May", "V": 11.0, "Forecast_Indicator": "Actual"}, 
                     {"LOB": "Cloud Dedicated", "STLF": 30.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 31.0, "mon": "June", "V": 12.0, "Forecast_Indicator": "Actual"}, 
                     {"LOB": "Cloud Dedicated", "STLF": 32.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 33.0, "mon": "July", "V": 13.0, "Forecast_Indicator": "Actual"}, 
                     {"LOB": "Cloud Dedicated", "STLF": 34.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 35.0, "mon": "August", "V": 14.0, "Forecast_Indicator": "Actual"}, 
                     {"LOB": "Cloud Dedicated", "STLF": 36.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 37.0, "mon": "September", "V": 15.0, "Forecast_Indicator": "Actual"}]}
     
-    for num in data[forecast]:
+    for num in data["forecast"]:
         if num["LOB"]==lob and num["mon"]==date:
             res=num["Arima"]
     # print(json.dumps(item, indent=4))
