@@ -50,7 +50,7 @@ def makeWebhookResult(req):
                     {"LOB": "Cloud Dedicated", "STLF": 32.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 33.0, "mon": "July", "V": 13.0, "Forecast_Indicator": "Actual"}, 
                     {"LOB": "Cloud Dedicated", "STLF": 34.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 35.0, "mon": "August", "V": 14.0, "Forecast_Indicator": "Actual"}, 
                     {"LOB": "Cloud Dedicated", "STLF": 36.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 37.0, "mon": "September", "V": 15.0, "Forecast_Indicator": "Actual"}]}
-    
+    res=1000
     for num in data["forecast"]:
         if num["LOB"]==lob and num["mon"]==date:
             res=num["Arima"]
