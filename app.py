@@ -52,7 +52,7 @@ def makeWebhookResult(req):
                     {"LOB": "Cloud Dedicated", "STLF": 36.0, "AREA": "Western Europe", "year": 2016.0, "Arima": 37.0, "mon": "September", "V": 15.0, "Forecast_Indicator": "Actual"}]}
     res=1000.0
     for num in data["forecast"]:
-        if num["LOB"]==lob: #and str.lower(num["mon"])==str.lower(date):
+        if num["LOB"]==lob and str.lower(num["mon"])==str.lower(date):
             res=num["Arima"]
     # print(json.dumps(item, indent=4))
     
